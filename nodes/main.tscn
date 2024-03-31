@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://bpmgurcme1jyq"]
+[gd_scene load_steps=50 format=3 uid="uid://bpmgurcme1jyq"]
 
 [ext_resource type="Script" path="res://src/Main.cs" id="1_mxifd"]
 [ext_resource type="Script" path="res://src/TopRightControls.cs" id="2_iknwv"]
@@ -19,7 +19,6 @@
 [ext_resource type="Texture2D" uid="uid://dkiygsxuu77db" path="res://assets/images/piano-white-key-hole.png" id="17_4kjg0"]
 [ext_resource type="Texture2D" uid="uid://c6bkjw1bp158d" path="res://assets/images/piano-white-key-hole-pressed.png" id="18_6wm3f"]
 [ext_resource type="Script" path="res://src/Keybind.cs" id="19_f6wk4"]
-[ext_resource type="FontFile" uid="uid://ci1ku5ku3vv6w" path="res://assets/fonts/inter/web/Inter-Medium.woff2" id="20_bk3lv"]
 [ext_resource type="Script" path="res://src/NoteLabel.cs" id="21_3dggh"]
 [ext_resource type="PackedScene" uid="uid://dyowx8bbpsqtj" path="res://nodes/piano_key_b.tscn" id="22_wquns"]
 [ext_resource type="PackedScene" uid="uid://djuhbnf64gblw" path="res://nodes/piano_key_c.tscn" id="23_hlumn"]
@@ -65,7 +64,7 @@ font = ExtResource("9_csn3j")
 font_size = 9
 
 [sub_resource type="LabelSettings" id="LabelSettings_byda3"]
-font = ExtResource("20_bk3lv")
+font = ExtResource("9_csn3j")
 font_size = 49
 shadow_size = 5
 shadow_color = Color(0.0980392, 0.0980392, 0.0980392, 1)
