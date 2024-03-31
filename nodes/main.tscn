@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://bpmgurcme1jyq"]
+[gd_scene load_steps=51 format=3 uid="uid://bpmgurcme1jyq"]
 
 [ext_resource type="Script" path="res://src/Main.cs" id="1_mxifd"]
 [ext_resource type="Script" path="res://src/TopRightControls.cs" id="2_iknwv"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://lxjv4jm6n7l3" path="res://assets/images/icons/stop.png" id="6_vs7fh"]
 [ext_resource type="Script" path="res://src/StopMidiFileButton.cs" id="7_0hjwt"]
 [ext_resource type="Texture2D" uid="uid://b1w0unbbjl873" path="res://assets/images/icons/note.png" id="8_b3dy5"]
+[ext_resource type="FontFile" uid="uid://bo6aw0nmypc3o" path="res://assets/fonts/InterDisplay-Medium.woff2" id="9_csn3j"]
 [ext_resource type="Script" path="res://src/LoadMidiFileButton.cs" id="9_fsi58"]
 [ext_resource type="Texture2D" uid="uid://nlyuql3mhfm7" path="res://assets/images/icons/settings.png" id="10_3yyli"]
 [ext_resource type="Script" path="res://src/SettingsPanelButton.cs" id="11_2xasi"]
@@ -46,21 +47,21 @@
 [ext_resource type="Script" path="res://src/Config/ConfigManager.cs" id="44_idw4d"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_v7qmo"]
-font = ExtResource("20_bk3lv")
+font = ExtResource("9_csn3j")
 font_color = Color(0.133333, 0.133333, 0.133333, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_aghe5"]
-font = ExtResource("20_bk3lv")
+font = ExtResource("9_csn3j")
 font_size = 12
 font_color = Color(0.133333, 0.133333, 0.133333, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_k2lv6"]
-font = ExtResource("20_bk3lv")
+font = ExtResource("9_csn3j")
 font_size = 14
 font_color = Color(0.933333, 0.933333, 0.933333, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_1hfa5"]
-font = ExtResource("20_bk3lv")
+font = ExtResource("9_csn3j")
 font_size = 9
 
 [sub_resource type="LabelSettings" id="LabelSettings_byda3"]
