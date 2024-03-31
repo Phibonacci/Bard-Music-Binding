@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://b5xx705deoovx"]
+
+[ext_resource type="Shader" path="res://shaders/time_note.gdshader" id="1_ua086"]
+[ext_resource type="Texture2D" uid="uid://cagb755gbeiv3" path="res://assets/images/noise/Abstract_Noise_001-128x128.png" id="2_24kw5"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_ua086")
+shader_parameter/timeScaleFactor = -2.0
+shader_parameter/color = Color(0.8, 0.278431, 0.0392157, 1)
+shader_parameter/intense = false
+shader_parameter/noise_texture = ExtResource("2_24kw5")

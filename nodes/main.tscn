@@ -1,0 +1,4503 @@
+[gd_scene load_steps=50 format=3 uid="uid://bpmgurcme1jyq"]
+
+[ext_resource type="Script" path="res://src/Main.cs" id="1_mxifd"]
+[ext_resource type="Script" path="res://src/TopRightControls.cs" id="2_iknwv"]
+[ext_resource type="Theme" uid="uid://cmpe776fbupee" path="res://themes/BardTheme.tres" id="3_a44rs"]
+[ext_resource type="Texture2D" uid="uid://dibog7lavm2ji" path="res://assets/images/icons/play.png" id="4_ph5l8"]
+[ext_resource type="Script" path="res://src/PlayMidiFileButton.cs" id="5_4nb5d"]
+[ext_resource type="Texture2D" uid="uid://lxjv4jm6n7l3" path="res://assets/images/icons/stop.png" id="6_vs7fh"]
+[ext_resource type="Script" path="res://src/StopMidiFileButton.cs" id="7_0hjwt"]
+[ext_resource type="Texture2D" uid="uid://b1w0unbbjl873" path="res://assets/images/icons/note.png" id="8_b3dy5"]
+[ext_resource type="Script" path="res://src/LoadMidiFileButton.cs" id="9_fsi58"]
+[ext_resource type="Texture2D" uid="uid://nlyuql3mhfm7" path="res://assets/images/icons/settings.png" id="10_3yyli"]
+[ext_resource type="Script" path="res://src/SettingsPanelButton.cs" id="11_2xasi"]
+[ext_resource type="Script" path="res://src/MusicVisualizer.cs" id="13_ol5ce"]
+[ext_resource type="Script" path="res://src/Timeline.cs" id="14_0lpqx"]
+[ext_resource type="Texture2D" uid="uid://cwolexabc0ree" path="res://assets/images/piano/Felt/Felt.png" id="15_ba010"]
+[ext_resource type="PackedScene" uid="uid://dgak826fm13xn" path="res://nodes/piano_key_a.tscn" id="16_rwh2t"]
+[ext_resource type="Texture2D" uid="uid://dkiygsxuu77db" path="res://assets/images/piano-white-key-hole.png" id="17_4kjg0"]
+[ext_resource type="Texture2D" uid="uid://c6bkjw1bp158d" path="res://assets/images/piano-white-key-hole-pressed.png" id="18_6wm3f"]
+[ext_resource type="Script" path="res://src/Keybind.cs" id="19_f6wk4"]
+[ext_resource type="FontFile" uid="uid://ci1ku5ku3vv6w" path="res://assets/fonts/inter/web/Inter-Medium.woff2" id="20_bk3lv"]
+[ext_resource type="Script" path="res://src/NoteLabel.cs" id="21_3dggh"]
+[ext_resource type="PackedScene" uid="uid://dyowx8bbpsqtj" path="res://nodes/piano_key_b.tscn" id="22_wquns"]
+[ext_resource type="PackedScene" uid="uid://djuhbnf64gblw" path="res://nodes/piano_key_c.tscn" id="23_hlumn"]
+[ext_resource type="PackedScene" uid="uid://ck8p06b1u4f1f" path="res://nodes/piano_key_d.tscn" id="24_8abqp"]
+[ext_resource type="PackedScene" uid="uid://babamh5u5uv0x" path="res://nodes/piano_key_e.tscn" id="25_shco6"]
+[ext_resource type="PackedScene" uid="uid://df56sblwoqq8" path="res://nodes/piano_key_f.tscn" id="26_hy23p"]
+[ext_resource type="PackedScene" uid="uid://dhrfr0yfn1qvq" path="res://nodes/piano_key_g.tscn" id="27_u0ty2"]
+[ext_resource type="Texture2D" uid="uid://cxwbyxhb5air0" path="res://assets/images/piano/Flats + Sharps/White.png" id="28_l5ids"]
+[ext_resource type="Texture2D" uid="uid://bekty5bvpwrbl" path="res://assets/images/piano/Flats + Sharps/WhitePressed.png" id="29_u4v3w"]
+[ext_resource type="Script" path="res://src/PianoKey.cs" id="30_ljb1f"]
+[ext_resource type="Texture2D" uid="uid://cgvkpag6y1nxs" path="res://assets/images/piano-black-key-hole.png" id="31_1pyt6"]
+[ext_resource type="Texture2D" uid="uid://v6cg6jknuaad" path="res://assets/images/piano-black-key-hole-pressed.png" id="32_8ft28"]
+[ext_resource type="Script" path="res://src/Message.cs" id="32_xjcky"]
+[ext_resource type="Script" path="res://src/Settings.cs" id="33_12rhg"]
+[ext_resource type="Script" path="res://src/UIWindowsList.cs" id="34_6p8fy"]
+[ext_resource type="Texture2D" uid="uid://cabwp3g2lwtev" path="res://assets/images/icons/cancel.png" id="35_rpsft"]
+[ext_resource type="Script" path="res://src/InstrumentsList.cs" id="36_r204f"]
+[ext_resource type="Texture2D" uid="uid://c5611a1tcwee8" path="res://assets/images/icons/reload.png" id="37_445t4"]
+[ext_resource type="Script" path="res://src/ShowKeybindsCheckButton.cs" id="38_afag5"]
+[ext_resource type="Script" path="res://src/ShowNotesCheckButton.cs" id="39_8q40u"]
+[ext_resource type="Script" path="res://src/ShowMidiCheckButton.cs" id="40_8vr57"]
+[ext_resource type="Script" path="res://src/Controllers/WindowController.cs" id="41_1s1h2"]
+[ext_resource type="Script" path="res://src/Controllers/MidiController.cs" id="42_lm31w"]
+[ext_resource type="Script" path="res://src/MidiPlayer.cs" id="43_re3r0"]
+[ext_resource type="Script" path="res://src/Config/ConfigManager.cs" id="44_idw4d"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_v7qmo"]
+font = ExtResource("20_bk3lv")
+font_color = Color(0.133333, 0.133333, 0.133333, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_aghe5"]
+font = ExtResource("20_bk3lv")
+font_size = 12
+font_color = Color(0.133333, 0.133333, 0.133333, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_k2lv6"]
+font = ExtResource("20_bk3lv")
+font_size = 14
+font_color = Color(0.933333, 0.933333, 0.933333, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1hfa5"]
+font = ExtResource("20_bk3lv")
+font_size = 9
+
+[sub_resource type="LabelSettings" id="LabelSettings_byda3"]
+font = ExtResource("20_bk3lv")
+font_size = 49
+shadow_size = 5
+shadow_color = Color(0.0980392, 0.0980392, 0.0980392, 1)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_mxifd")
+
+[node name="Desktop" type="CanvasLayer" parent="."]
+
+[node name="MusicVisualizer" type="CanvasLayer" parent="Desktop"]
+script = ExtResource("13_ol5ce")
+
+[node name="Timeline" type="Node2D" parent="Desktop/MusicVisualizer"]
+process_mode = 3
+script = ExtResource("14_0lpqx")
+
+[node name="Piano" type="Node2D" parent="Desktop/MusicVisualizer"]
+z_index = 3
+position = Vector2(0, 475)
+
+[node name="Felt" type="Sprite2D" parent="Desktop/MusicVisualizer/Piano"]
+position = Vector2(520, -2)
+scale = Vector2(4, 4)
+texture = ExtResource("15_ba010")
+
+[node name="Keys" type="Node2D" parent="Desktop/MusicVisualizer/Piano"]
+
+[node name="A0" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("16_rwh2t")]
+offset_left = 2.0
+offset_top = 0.0
+offset_right = 18.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/A0"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/A0/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/A0"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="B0" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("22_wquns")]
+offset_left = 22.0
+offset_top = 0.0
+offset_right = 38.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/B0"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/B0/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/B0"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="C1" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("23_hlumn")]
+offset_left = 42.0
+offset_right = 58.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/C1"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/C1/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/C1"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="D1" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("24_8abqp")]
+offset_left = 62.0
+offset_top = 0.0
+offset_right = 78.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/D1"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/D1/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/D1"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="E1" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("25_shco6")]
+offset_left = 82.0
+offset_top = 0.0
+offset_right = 98.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/E1"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/E1/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/E1"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="F1" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("26_hy23p")]
+offset_left = 102.0
+offset_top = 0.0
+offset_right = 118.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/F1"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/F1/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/F1"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="G1" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("27_u0ty2")]
+offset_left = 122.0
+offset_top = 0.0
+offset_right = 138.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/G1"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/G1/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/G1"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="A1" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("16_rwh2t")]
+offset_left = 142.0
+offset_top = 0.0
+offset_right = 158.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/A1"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/A1/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/A1"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="B1" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("22_wquns")]
+offset_left = 162.0
+offset_top = 0.0
+offset_right = 178.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/B1"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/B1/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/B1"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="C2" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("23_hlumn")]
+offset_left = 182.0
+offset_right = 198.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/C2"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/C2/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/C2"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="D2" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("24_8abqp")]
+offset_left = 202.0
+offset_top = 0.0
+offset_right = 218.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/D2"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/D2/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/D2"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="E2" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("25_shco6")]
+offset_left = 222.0
+offset_top = 0.0
+offset_right = 238.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/E2"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/E2/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/E2"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="F2" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("26_hy23p")]
+offset_left = 242.0
+offset_top = 0.0
+offset_right = 258.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/F2"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/F2/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/F2"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="G2" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("27_u0ty2")]
+offset_left = 262.0
+offset_top = 0.0
+offset_right = 278.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/G2"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/G2/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/G2"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="A2" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("16_rwh2t")]
+offset_left = 282.0
+offset_top = 0.0
+offset_right = 298.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/A2"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/A2/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/A2"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="B2" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("22_wquns")]
+offset_left = 302.0
+offset_top = 0.0
+offset_right = 318.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/B2"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/B2/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/B2"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="C3" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("23_hlumn")]
+offset_left = 322.0
+offset_right = 338.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/C3"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/C3/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/C3"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="D3" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("24_8abqp")]
+offset_left = 342.0
+offset_top = 0.0
+offset_right = 358.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/D3"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/D3/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/D3"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="E3" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("25_shco6")]
+offset_left = 362.0
+offset_top = 0.0
+offset_right = 378.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/E3"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/E3/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/E3"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="F3" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("26_hy23p")]
+offset_left = 382.0
+offset_top = 0.0
+offset_right = 398.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/F3"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/F3/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/F3"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="G3" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("27_u0ty2")]
+offset_left = 402.0
+offset_top = 0.0
+offset_right = 418.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/G3"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/G3/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/G3"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="A3" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("16_rwh2t")]
+offset_left = 422.0
+offset_top = 0.0
+offset_right = 438.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/A3"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/A3/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/A3"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="B3" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("22_wquns")]
+offset_left = 442.0
+offset_top = 0.0
+offset_right = 458.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/B3"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/B3/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/B3"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="C4" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("23_hlumn")]
+offset_left = 462.0
+offset_right = 478.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/C4"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/C4/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/C4"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="D4" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("24_8abqp")]
+offset_left = 482.0
+offset_top = 0.0
+offset_right = 498.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/D4"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/D4/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/D4"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="E4" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("25_shco6")]
+offset_left = 502.0
+offset_top = 0.0
+offset_right = 518.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/E4"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/E4/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/E4"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="F4" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("26_hy23p")]
+offset_left = 522.0
+offset_top = 0.0
+offset_right = 538.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/F4"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/F4/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/F4"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="G4" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("27_u0ty2")]
+offset_left = 542.0
+offset_top = 0.0
+offset_right = 558.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/G4"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/G4/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/G4"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="A4" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("16_rwh2t")]
+offset_left = 562.0
+offset_top = 0.0
+offset_right = 578.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/A4"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/A4/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/A4"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="B4" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("22_wquns")]
+offset_left = 582.0
+offset_top = 0.0
+offset_right = 598.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/B4"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/B4/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/B4"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="C5" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("23_hlumn")]
+offset_left = 602.0
+offset_right = 618.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/C5"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/C5/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/C5"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="D5" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("24_8abqp")]
+offset_left = 622.0
+offset_top = 0.0
+offset_right = 638.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/D5"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/D5/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/D5"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="E5" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("25_shco6")]
+offset_left = 642.0
+offset_top = 0.0
+offset_right = 658.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/E5"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/E5/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/E5"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="F5" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("26_hy23p")]
+offset_left = 662.0
+offset_top = 0.0
+offset_right = 678.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/F5"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/F5/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/F5"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="G5" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("27_u0ty2")]
+offset_left = 682.0
+offset_top = 0.0
+offset_right = 698.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/G5"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/G5/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/G5"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="A5" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("16_rwh2t")]
+offset_left = 702.0
+offset_top = 0.0
+offset_right = 718.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/A5"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/A5/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/A5"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="B5" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("22_wquns")]
+offset_left = 722.0
+offset_top = 0.0
+offset_right = 738.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/B5"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/B5/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/B5"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="C6" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("23_hlumn")]
+offset_left = 742.0
+offset_right = 758.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/C6"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/C6/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/C6"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="D6" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("24_8abqp")]
+offset_left = 762.0
+offset_top = 0.0
+offset_right = 778.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/D6"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/D6/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/D6"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="E6" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("25_shco6")]
+offset_left = 782.0
+offset_top = 0.0
+offset_right = 798.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/E6"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/E6/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/E6"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="F6" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("26_hy23p")]
+offset_left = 802.0
+offset_top = 0.0
+offset_right = 818.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/F6"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/F6/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/F6"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="G6" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("27_u0ty2")]
+offset_left = 822.0
+offset_top = 0.0
+offset_right = 838.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/G6"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/G6/Keybind"]
+layout_mode = 0
+offset_top = 1.31575
+offset_right = 20.0
+offset_bottom = 24.3158
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/G6"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="A6" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("16_rwh2t")]
+offset_left = 842.0
+offset_top = 0.0
+offset_right = 858.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/A6"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/A6/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/A6"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="B6" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("22_wquns")]
+offset_left = 862.0
+offset_top = 0.0
+offset_right = 878.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/B6"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/B6/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/B6"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="C7" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("23_hlumn")]
+offset_left = 882.0
+offset_right = 898.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/C7"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/C7/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/C7"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="D7" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("24_8abqp")]
+offset_left = 902.0
+offset_top = 0.0
+offset_right = 918.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/D7"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/D7/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/D7"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="E7" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("25_shco6")]
+offset_left = 922.0
+offset_top = 0.0
+offset_right = 938.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/E7"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/E7/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/E7"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="F7" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("26_hy23p")]
+offset_left = 942.0
+offset_top = 0.0
+offset_right = 958.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/F7"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/F7/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/F7"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="G7" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("27_u0ty2")]
+offset_left = 962.0
+offset_top = 0.0
+offset_right = 978.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/G7"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/G7/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/G7"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="A7" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("16_rwh2t")]
+offset_left = 982.0
+offset_top = 0.0
+offset_right = 998.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/A7"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/A7/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/A7"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="B7" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("22_wquns")]
+offset_left = 1002.0
+offset_top = 0.0
+offset_right = 1018.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/B7"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/B7/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/B7"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="C8" parent="Desktop/MusicVisualizer/Piano/Keys" instance=ExtResource("23_hlumn")]
+offset_left = 1022.0
+offset_right = 1038.0
+offset_bottom = 108.0
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/C8"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 82.0
+offset_right = 18.0
+offset_bottom = 101.0
+scale = Vector2(0.76, 0.76)
+toggle_mode = true
+texture_normal = ExtResource("17_4kjg0")
+texture_pressed = ExtResource("18_6wm3f")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/C8/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_v7qmo")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/C8"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 69.0
+offset_right = 18.0
+offset_bottom = 86.0
+scale = Vector2(0.8, 0.8)
+text = "C2"
+label_settings = SubResource("LabelSettings_aghe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="A#0" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+offset_left = 14.0
+offset_right = 26.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/A#0"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/A#0/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/A#0"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="C#1" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+offset_left = 54.0
+offset_right = 66.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/C#1"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/C#1/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/C#1"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="D#1" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+offset_left = 74.0
+offset_right = 86.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/D#1"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/D#1/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/D#1"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="F#1" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+anchors_preset = -1
+anchor_left = -3.08333
+anchor_right = -3.08333
+offset_left = 114.0
+offset_right = 126.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/F#1"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/F#1/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/F#1"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="G#1" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+anchors_preset = -1
+anchor_left = -3.08333
+anchor_right = -3.08333
+offset_left = 134.0
+offset_right = 146.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/G#1"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/G#1/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/G#1"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="A#1" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+anchors_preset = -1
+anchor_left = -3.08333
+anchor_right = -3.08333
+offset_left = 154.0
+offset_right = 166.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/A#1"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/A#1/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/A#1"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="C#2" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+offset_left = 194.0
+offset_right = 206.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/C#2"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/C#2/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/C#2"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="D#2" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+offset_left = 214.0
+offset_right = 226.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/D#2"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/D#2/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/D#2"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="F#2" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+anchors_preset = -1
+anchor_left = -3.08333
+anchor_right = -3.08333
+offset_left = 254.0
+offset_right = 266.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/F#2"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/F#2/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/F#2"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="G#2" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+anchors_preset = -1
+anchor_left = -3.08333
+anchor_right = -3.08333
+offset_left = 274.0
+offset_right = 286.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/G#2"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/G#2/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/G#2"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="A#2" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+anchors_preset = -1
+anchor_left = -3.08333
+anchor_right = -3.08333
+offset_left = 294.0
+offset_right = 306.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/A#2"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/A#2/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "this is a long test"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/A#2"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="C#3" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+offset_left = 334.0
+offset_right = 346.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/C#3"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/C#3/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/C#3"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="D#3" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+offset_left = 354.0
+offset_right = 366.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/D#3"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/D#3/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/D#3"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="F#3" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+anchors_preset = -1
+anchor_left = -3.08333
+anchor_right = -3.08333
+offset_left = 394.0
+offset_right = 406.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/F#3"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/F#3/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/F#3"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="G#3" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+anchors_preset = -1
+anchor_left = -3.08333
+anchor_right = -3.08333
+offset_left = 414.0
+offset_right = 426.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/G#3"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/G#3/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/G#3"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="A#3" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+anchors_preset = -1
+anchor_left = -3.08333
+anchor_right = -3.08333
+offset_left = 434.0
+offset_right = 446.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/A#3"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/A#3/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/A#3"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="C#4" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+offset_left = 474.0
+offset_right = 486.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/C#4"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/C#4/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/C#4"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="D#4" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+offset_left = 494.0
+offset_right = 506.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/D#4"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/D#4/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/D#4"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="F#4" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+anchors_preset = -1
+anchor_left = -3.08333
+anchor_right = -3.08333
+offset_left = 534.0
+offset_right = 546.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/F#4"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/F#4/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/F#4"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="G#4" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+anchors_preset = -1
+anchor_left = -3.08333
+anchor_right = -3.08333
+offset_left = 554.0
+offset_right = 566.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/G#4"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/G#4/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/G#4"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="A#4" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+anchors_preset = -1
+anchor_left = -3.08333
+anchor_right = -3.08333
+offset_left = 574.0
+offset_right = 586.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/A#4"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/A#4/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/A#4"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="C#5" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+offset_left = 614.0
+offset_right = 626.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/C#5"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/C#5/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/C#5"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="D#5" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+offset_left = 634.0
+offset_right = 646.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/D#5"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/D#5/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/D#5"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="F#5" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+anchors_preset = -1
+anchor_left = -3.08333
+anchor_right = -3.08333
+offset_left = 674.0
+offset_right = 686.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/F#5"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/F#5/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/F#5"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="G#5" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+anchors_preset = -1
+anchor_left = -3.08333
+anchor_right = -3.08333
+offset_left = 694.0
+offset_right = 706.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/G#5"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/G#5/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/G#5"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="A#5" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+anchors_preset = -1
+anchor_left = -3.08333
+anchor_right = -3.08333
+offset_left = 714.0
+offset_right = 726.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/A#5"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/A#5/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/A#5"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="C#6" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+offset_left = 754.0
+offset_right = 766.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/C#6"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/C#6/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/C#6"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="D#6" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+offset_left = 774.0
+offset_right = 786.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/D#6"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/D#6/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/D#6"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="F#6" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+anchors_preset = -1
+anchor_left = -3.08333
+anchor_right = -3.08333
+offset_left = 814.0
+offset_right = 826.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/F#6"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/F#6/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/F#6"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="G#6" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+anchors_preset = -1
+anchor_left = -3.08333
+anchor_right = -3.08333
+offset_left = 834.0
+offset_right = 846.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/G#6"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/G#6/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/G#6"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="A#6" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+anchors_preset = -1
+anchor_left = -3.08333
+anchor_right = -3.08333
+offset_left = 854.0
+offset_right = 866.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/A#6"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/A#6/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/A#6"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="C#7" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+offset_left = 894.0
+offset_right = 906.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/C#7"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/C#7/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/C#7"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="D#7" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+offset_left = 914.0
+offset_right = 926.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/D#7"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/D#7/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/D#7"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="F#7" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+anchors_preset = -1
+anchor_left = -3.08333
+anchor_right = -3.08333
+offset_left = 954.0
+offset_right = 966.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/F#7"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/F#7/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/F#7"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="G#7" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+anchors_preset = -1
+anchor_left = -3.08333
+anchor_right = -3.08333
+offset_left = 974.0
+offset_right = 986.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/G#7"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/G#7/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/G#7"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="A#7" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys"]
+anchors_preset = -1
+anchor_left = -3.08333
+anchor_right = -3.08333
+offset_left = 994.0
+offset_right = 1006.0
+offset_bottom = 64.0
+toggle_mode = true
+button_mask = 0
+texture_normal = ExtResource("28_l5ids")
+texture_pressed = ExtResource("29_u4v3w")
+stretch_mode = 4
+script = ExtResource("30_ljb1f")
+
+[node name="Keybind" type="TextureButton" parent="Desktop/MusicVisualizer/Piano/Keys/A#7"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 37.0
+offset_right = 17.0
+offset_bottom = 59.0
+scale = Vector2(0.63, 0.63)
+toggle_mode = true
+texture_normal = ExtResource("31_1pyt6")
+texture_pressed = ExtResource("32_8ft28")
+stretch_mode = 0
+script = ExtResource("19_f6wk4")
+
+[node name="KeybindLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/A#7/Keybind"]
+layout_mode = 0
+offset_top = 2.63154
+offset_right = 20.0
+offset_bottom = 25.6315
+scale = Vector2(0.8, 0.8)
+text = "K"
+label_settings = SubResource("LabelSettings_k2lv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="NoteLabel" type="Label" parent="Desktop/MusicVisualizer/Piano/Keys/A#7"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 25.0
+offset_right = 16.0
+offset_bottom = 39.0
+scale = Vector2(0.82, 0.82)
+text = "C2"
+label_settings = SubResource("LabelSettings_1hfa5")
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("21_3dggh")
+
+[node name="Controls" type="CanvasLayer" parent="Desktop"]
+layer = 2
+
+[node name="TopRightControls" type="HBoxContainer" parent="Desktop/Controls"]
+offset_left = 864.0
+offset_top = 4.0
+offset_right = 1036.0
+offset_bottom = 44.0
+alignment = 2
+script = ExtResource("2_iknwv")
+
+[node name="MidiPlayerControls" type="HBoxContainer" parent="Desktop/Controls/TopRightControls"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="PlayMidiFileButton" type="Button" parent="Desktop/Controls/TopRightControls/MidiPlayerControls"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme = ExtResource("3_a44rs")
+icon = ExtResource("4_ph5l8")
+icon_alignment = 1
+script = ExtResource("5_4nb5d")
+
+[node name="StopMidiFileButton" type="Button" parent="Desktop/Controls/TopRightControls/MidiPlayerControls"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme = ExtResource("3_a44rs")
+icon = ExtResource("6_vs7fh")
+icon_alignment = 1
+script = ExtResource("7_0hjwt")
+
+[node name="LoadMidiFileButton" type="Button" parent="Desktop/Controls/TopRightControls/MidiPlayerControls"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme = ExtResource("3_a44rs")
+icon = ExtResource("8_b3dy5")
+icon_alignment = 1
+script = ExtResource("9_fsi58")
+
+[node name="SettingsPanelButton" type="Button" parent="Desktop/Controls/TopRightControls"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme = ExtResource("3_a44rs")
+icon = ExtResource("10_3yyli")
+icon_alignment = 1
+script = ExtResource("11_2xasi")
+
+[node name="Message" type="CanvasLayer" parent="."]
+layer = 3
+script = ExtResource("32_xjcky")
+
+[node name="MessageLabel" type="Label" parent="Message"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -520.0
+offset_top = -42.0
+offset_right = 520.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press a key to assign to "
+label_settings = SubResource("LabelSettings_byda3")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Settings" type="CanvasLayer" parent="."]
+layer = 4
+visible = false
+script = ExtResource("33_12rhg")
+
+[node name="SettingsPanel" type="PanelContainer" parent="Settings"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -210.0
+offset_top = -211.0
+offset_right = 210.0
+offset_bottom = 211.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("3_a44rs")
+
+[node name="SettingsBackgroundPanel" type="Panel" parent="Settings/SettingsPanel"]
+custom_minimum_size = Vector2(350, 350)
+layout_mode = 2
+theme = ExtResource("3_a44rs")
+
+[node name="SettingsMarginContainer" type="MarginContainer" parent="Settings/SettingsPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="SettingsVBoxContainer" type="VBoxContainer" parent="Settings/SettingsPanel/SettingsMarginContainer"]
+layout_mode = 2
+
+[node name="WindowVBoxContainer" type="VBoxContainer" parent="Settings/SettingsPanel/SettingsMarginContainer/SettingsVBoxContainer"]
+layout_mode = 2
+
+[node name="WindowTitle" type="Label" parent="Settings/SettingsPanel/SettingsMarginContainer/SettingsVBoxContainer/WindowVBoxContainer"]
+layout_mode = 2
+text = "Selected window"
+vertical_alignment = 1
+
+[node name="WindowHSplitContainer" type="HSplitContainer" parent="Settings/SettingsPanel/SettingsMarginContainer/SettingsVBoxContainer/WindowVBoxContainer"]
+layout_mode = 2
+split_offset = 5000
+dragger_visibility = 1
+
+[node name="WindowsList" type="MenuButton" parent="Settings/SettingsPanel/SettingsMarginContainer/SettingsVBoxContainer/WindowVBoxContainer/WindowHSplitContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+flat = false
+clip_text = true
+script = ExtResource("34_6p8fy")
+
+[node name="UnsetWindowButton" type="Button" parent="Settings/SettingsPanel/SettingsMarginContainer/SettingsVBoxContainer/WindowVBoxContainer/WindowHSplitContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+icon = ExtResource("35_rpsft")
+icon_alignment = 1
+
+[node name="AutolockCheckButton" type="CheckButton" parent="Settings/SettingsPanel/SettingsMarginContainer/SettingsVBoxContainer/WindowVBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Autolock window"
+
+[node name="HSeparator" type="HSeparator" parent="Settings/SettingsPanel/SettingsMarginContainer/SettingsVBoxContainer"]
+layout_mode = 2
+
+[node name="MidiVBoxContainer" type="VBoxContainer" parent="Settings/SettingsPanel/SettingsMarginContainer/SettingsVBoxContainer"]
+layout_mode = 2
+
+[node name="MidiTitle" type="Label" parent="Settings/SettingsPanel/SettingsMarginContainer/SettingsVBoxContainer/MidiVBoxContainer"]
+layout_mode = 2
+text = "MIDI devices"
+vertical_alignment = 1
+
+[node name="MidiHSplitContainer" type="HSplitContainer" parent="Settings/SettingsPanel/SettingsMarginContainer/SettingsVBoxContainer/MidiVBoxContainer"]
+layout_mode = 2
+split_offset = 5000
+dragger_visibility = 1
+
+[node name="InstrumentsList" type="ItemList" parent="Settings/SettingsPanel/SettingsMarginContainer/SettingsVBoxContainer/MidiVBoxContainer/MidiHSplitContainer"]
+custom_minimum_size = Vector2(250, 130)
+layout_mode = 2
+item_count = 6
+item_0/text = "test"
+item_1/text = "test2"
+item_2/text = "test3"
+item_3/text = "test4"
+item_4/text = "test5"
+item_5/text = "test6"
+script = ExtResource("36_r204f")
+
+[node name="RefreshInstrumentsButton" type="Button" parent="Settings/SettingsPanel/SettingsMarginContainer/SettingsVBoxContainer/MidiVBoxContainer/MidiHSplitContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+icon = ExtResource("37_445t4")
+icon_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="Settings/SettingsPanel/SettingsMarginContainer/SettingsVBoxContainer"]
+layout_mode = 2
+
+[node name="KeyboardVBoxContainer" type="VBoxContainer" parent="Settings/SettingsPanel/SettingsMarginContainer/SettingsVBoxContainer"]
+layout_mode = 2
+
+[node name="KeyboardTitle" type="Label" parent="Settings/SettingsPanel/SettingsMarginContainer/SettingsVBoxContainer/KeyboardVBoxContainer"]
+layout_mode = 2
+text = "Keyboard"
+vertical_alignment = 1
+
+[node name="ShowKeybindsCheckButton" type="CheckButton" parent="Settings/SettingsPanel/SettingsMarginContainer/SettingsVBoxContainer/KeyboardVBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Show keybinds"
+script = ExtResource("38_afag5")
+
+[node name="ShowNotesCheckButton" type="CheckButton" parent="Settings/SettingsPanel/SettingsMarginContainer/SettingsVBoxContainer/KeyboardVBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Show notes"
+script = ExtResource("39_8q40u")
+
+[node name="ShowMidiCheckButton" type="CheckButton" parent="Settings/SettingsPanel/SettingsMarginContainer/SettingsVBoxContainer/KeyboardVBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Show MIDI file player"
+script = ExtResource("40_8vr57")
+
+[node name="WindowController" type="Node" parent="."]
+script = ExtResource("41_1s1h2")
+
+[node name="MidiController" type="Node" parent="."]
+script = ExtResource("42_lm31w")
+
+[node name="MidiPlayer" type="Node" parent="."]
+script = ExtResource("43_re3r0")
+
+[node name="ConfigManager" type="Node" parent="."]
+script = ExtResource("44_idw4d")

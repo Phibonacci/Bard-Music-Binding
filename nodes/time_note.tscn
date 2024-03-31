@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://dhib4wi3ntdb1"]
+
+[ext_resource type="Texture2D" uid="uid://cv44p575g7gag" path="res://assets/images/NoteTimeline.png" id="1_2v5u5"]
+[ext_resource type="Material" uid="uid://b5xx705deoovx" path="res://nodes/time_note_shadermaterial.tres" id="2_7mhgo"]
+[ext_resource type="Texture2D" uid="uid://crygwbpx7mtnh" path="res://assets/images/NoteTimelineInside.png" id="4_5furc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e65hg"]
+
+[node name="PanelContainer" type="PanelContainer"]
+offset_right = 10.0
+offset_bottom = 10.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_e65hg")
+
+[node name="TimeNote" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_2v5u5")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="Inside" type="NinePatchRect" parent="."]
+material = ExtResource("2_7mhgo")
+layout_mode = 2
+texture = ExtResource("4_5furc")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5

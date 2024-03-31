@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://df56sblwoqq8"]
+
+[ext_resource type="Texture2D" uid="uid://41cvdhtt1cvy" path="res://assets/images/piano/Keys/White2.png" id="1_c4weo"]
+[ext_resource type="Texture2D" uid="uid://nqrlfcdmpytl" path="res://assets/images/piano/Keys/White2Pressed.png" id="2_hx5d2"]
+[ext_resource type="Script" path="res://src/PianoKey.cs" id="3_arrw8"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_h8sym"]
+diffuse_texture = ExtResource("1_c4weo")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_o3w58"]
+diffuse_texture = ExtResource("2_hx5d2")
+
+[node name="PianoKeyF" type="TextureButton"]
+offset_left = 343.0
+offset_top = 466.0
+offset_right = 370.0
+offset_bottom = 648.0
+size_flags_horizontal = 0
+toggle_mode = true
+button_mask = 0
+texture_normal = SubResource("CanvasTexture_h8sym")
+texture_pressed = SubResource("CanvasTexture_o3w58")
+stretch_mode = 4
+script = ExtResource("3_arrw8")
