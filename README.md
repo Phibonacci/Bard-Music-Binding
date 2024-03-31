@@ -31,13 +31,13 @@ The code and the assets are under MIT except for some of the assets listed in th
 
 ### Graphical assets
 
-Icons from [iconify.design](https://icon-sets.iconify.design) including Material Line Icons by [Vjacheslav Trushkin](https://github.com/cyberalien/line-md) (MIT)
-[UI pack](https://opengameart.org/content/ui-pack) by [Kenney.nl](www.kenney.nl) (CC0)
-[Abstract Noise Pack](https://opengameart.org/content/abstract-noise-pack) by [Screaming Brain Studios](https://screamingbrainstudios.com/) (CC0)
-[Lava Shader](https://godotshaders.com/shader/lava-shader/) by [a-python-script](http://a-python-script.de/) (CC0)
+Icons from [iconify.design](https://icon-sets.iconify.design) including Material Line Icons by [Vjacheslav Trushkin](https://github.com/cyberalien/line-md) (MIT)  
+[UI pack](https://opengameart.org/content/ui-pack) by [Kenney.nl](www.kenney.nl) (CC0)  
+[Abstract Noise Pack](https://opengameart.org/content/abstract-noise-pack) by [Screaming Brain Studios](https://screamingbrainstudios.com/) (CC0)  
+[Lava Shader](https://godotshaders.com/shader/lava-shader/) by [a-python-script](http://a-python-script.de/) (CC0)  
 
 ### Code
 
-[Godot Engine](https://godotengine.org/) (MIT)
-[Midi Parser](https://github.com/davidluzgouveia/midi-parser) by David Gouveia (MIT)
-The library implementing the Alt+Tab algorithm is from [GoToWindow](https://github.com/christianrondeau/GoToWindow/) by  Christian Rondeau (MIT)
+[Godot Engine](https://godotengine.org/) (MIT)  
+[Midi Parser](https://github.com/davidluzgouveia/midi-parser) by David Gouveia (MIT)  
+The library implementing the Alt+Tab algorithm is from [GoToWindow](https://github.com/christianrondeau/GoToWindow/) by  Christian Rondeau (MIT)  
