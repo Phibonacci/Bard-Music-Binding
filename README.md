@@ -36,6 +36,10 @@ Icons from [iconify.design](https://icon-sets.iconify.design) including Material
 [Abstract Noise Pack](https://opengameart.org/content/abstract-noise-pack) by [Screaming Brain Studios](https://screamingbrainstudios.com/) (CC0)  
 [Lava Shader](https://godotshaders.com/shader/lava-shader/) by [a-python-script](http://a-python-script.de/) (CC0)  
 
+### Font
+
+Inter font from [The Inter Project](https://rsms.me/inter) (SIL Open Font License 1.1)
+
 ### Code
 
 [Godot Engine](https://godotengine.org/) (MIT)  
