@@ -110,8 +110,6 @@ namespace BardMusicBinding
 			var popup = this.GetPopup();
 			popup.Clear();
 			this.windowController.GetWindowsTitles().ForEach(t => popup.AddItem(t));
-			GD.Print($"{this.Size.X} and {popup.Size.X}");
-			//popup.Position = (Vector2I)new Vector2(this.Position.X + this.Size.X / 2 - popup.Size.X / 2, popup.Position.Y);
 			popup.MaxSize = new Vector2I(GetViewport().GetWindow().Size.X, popup.MaxSize.Y);
 		}
 	}
