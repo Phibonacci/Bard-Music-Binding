@@ -7,7 +7,6 @@ namespace Win32.Window
         IntPtr HWnd { get; set; }
         uint ProcessId { get; set; }
         string Title { get; set; }
-        IntPtr IconHandle { get; set; }
         bool IsVisible { get; set; }
 
         bool Focus();

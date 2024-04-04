@@ -22,10 +22,7 @@ namespace Win32.Window
 		public static WindowEntry Create(IntPtr hWnd)
 		{
 			var windowTitle = GetWindowTitle(hWnd);
-
 			_ = GetWindowThreadProcessId(hWnd, out uint processId);
-
-			var iconHandle = WindowIcon.GetAppIcon(hWnd);
 			var isVisible = !IsIconic(hWnd);
 
 			return new WindowEntry
@@ -33,7 +30,6 @@ namespace Win32.Window
 				HWnd = hWnd,
 				Title = windowTitle,
 				ProcessId = processId,
-				IconHandle = iconHandle,
 				IsVisible = isVisible
 			};
 		}
